@@ -4,9 +4,9 @@
 	ACF Fetch Field Key
 \*--------------------------------------------------------*/
 
-function acf__fetchFieldKey($field_name, $post_id) {
+function fetchFieldKey($field_name, $post_id) {
 	global $wpdb;
-	$acf_fields = $wpdb->get_results(
+	$acf__fields = $wpdb->get_results(
 		$wpdb->prepare( 
 			"SELECT ID, post_parent, post_name 
 			FROM $wpdb->posts 

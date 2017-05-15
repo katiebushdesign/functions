@@ -4,4 +4,5 @@
 	Global Variables
 \*--------------------------------------------------------*/
 
-// $GLOBALS[] = true;
+$GLOBALS['STYLE'] = [];
+$GLOBALS['VIDEOS'] = [];

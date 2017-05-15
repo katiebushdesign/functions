@@ -8,8 +8,8 @@ add_action('init', 'vlx__registerTaxonomies');
 
 function vlx__registerTaxonomies() {
 	$taxonomies = [
-		
-		// Team Categories		
+
+		// Team Categories
 		'categories--team' => [
 			'post__type' => 'team',
 			'name' => 'Categories',
@@ -19,6 +19,12 @@ function vlx__registerTaxonomies() {
 		'categories--partners' => [
 			'post__type' => 'partners',
 			'name' => 'Categories',
+		],
+
+		// Partners Locations
+		'categories--partners__location' => [
+			'post__type' => 'partners',
+			'name' => 'Location',
 		],
 
 		// Resources Type

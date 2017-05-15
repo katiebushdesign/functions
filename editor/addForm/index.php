@@ -16,14 +16,12 @@ function tinyMCE__setup() {
 }
 
 function theme__button($plugin__array) {
-	$plugin__array['addButton'] = '/content/themes/' . wp_get_theme()->template . '/functions/editor/js/addButton.js';
-	$plugin__array['addForm'] = '/content/themes/' . wp_get_theme()->template . '/functions/editor/js/addForm.js';
+	$plugin__array['addButton'] = '/content/themes/' . wp_get_theme()->template . '/functions/editor/addButton.js';
 	return $plugin__array;
 }
 
 function add__toolbarButton($buttons) {
 	array_push($buttons, 'addButton');
-	array_push($buttons, 'addForm');
 	return $buttons;
 }
 

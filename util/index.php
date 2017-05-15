@@ -10,7 +10,7 @@ $functions = [
 	'vars',
 
 	# General
-	'pre', 
+	'pre',
 	'getFile',
 	'loadTemplate',
 	'splitToSentence',
@@ -18,10 +18,15 @@ $functions = [
 	'camelCase',
 	'buildWrapper',
 	'postFields',
+	'getColor',
+	'outputCSSFile',
+	'isColumnRow',
+	'getLastChildren',
+	'getSliderNavType',
+	'childIsActive',
 
 	# Youtube
-	'youtube/getID',
-	'youtube/getSource',
+	'video/index',
 
 	# WP
 	'getContent',

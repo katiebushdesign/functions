@@ -10,7 +10,13 @@ function splitToSentence($content, $count) {
 	$sentence__count = 0;
 	foreach ($sentence as $s) {
 		if ($sentence__count < $count) {
-			$snippet .= $s . '. ';
+			$substr = substr($s, -2);
+			$snippet .= $s;
+
+			if (strpos($substr, '!') === false && strpos($substr, '?') === false && strpos($substr, '.') === false) {
+				$snippet .= '. ';
+			}
+
 			$sentence__count++;
 		} else {
 			break;

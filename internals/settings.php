@@ -1,6 +1,12 @@
 <?php
 
 /*--------------------------------------------------------*\
+	Title Tags (wp_title() to be deprecated)
+\*--------------------------------------------------------*/
+
+add_theme_support( 'title-tag' );
+
+/*--------------------------------------------------------*\
 	Remove Empty <p> tags from the_content()
 \*--------------------------------------------------------*/
 
@@ -38,7 +44,7 @@ if (function_exists( 'add_theme_support' )) {
 		'768',
 		'480',
 		'240',
-	];	
+	];
 
 	foreach ($sizes as $size) {
 		add_image_size($size, intval($size), 9999);

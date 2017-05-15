@@ -1,85 +1,91 @@
-<?php global $post;
+<?php
 
-# Link Shortener
-require_once dirname(__FILE__) . '/Google.class.php';
-$googl = new Googl('AIzaSyCgnokP_PRwEZQBT4bnPrdZWBK59YZNqgE');
+if (!function_exists('getSocialMediaValues')) {
+	function getSocialMediaValues($option = true) {
 
-# Twitter
-$twitter = get_field( 'twitter', 'option' );
-$twitter__handle = get_field( 'twitter__handle', 'option' );
-$twitter__icon = get__file( '/twitter.svg' );
-$twitter__share = urlencode($googl->shorten('//' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']));
+		global $post;
 
-# Facebook
-$facebook = get_field( 'facebook', 'option' );
-$facebook__icon = get__file( '/facebook.svg' );
+		# Link Shortener
+		require_once dirname(__FILE__) . '/Google.class.php';
+		$googl = new Googl('AIzaSyCgnokP_PRwEZQBT4bnPrdZWBK59YZNqgE');
 
-# Linkedin
-$linkedin = get_field( 'linkedin', 'option' );
-$linkedin__icon = get__file( '/linkedin.svg' );
+		# Twitter
+		$twitter = $option ? get_field( 'twitter', 'option' ) : get_field( 'twitter' );
+		$twitter__handle = get_field( 'twitter__handle', 'option' );
+		$twitter__icon = get__file( '/twitter.svg' );
+		$twitter__share = urlencode($googl->shorten('//' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']));
 
-# Google
-$google = get_field( 'google', 'option' );
-$google__icon = get__file( '/google.svg' );
+		# Facebook
+		$facebook = $option ? get_field( 'facebook', 'option' ) : get_field( 'facebook' );
+		$facebook__icon = get__file( '/facebook.svg' );
 
-# Youtube
-$youtube = get_field( 'youtube', 'option' );
-$youtube__icon = get__file( '/youtube.svg' );
+		# Linkedin
+		$linkedin = $option ? get_field( 'linkedin', 'option' ) : get_field( 'linkedin' );
+		$linkedin__icon = get__file( '/linkedin.svg' );
 
-# Instagram
-$instagram = get_field( 'instagram', 'option' );
-$instagram__icon = get__file( '/instagram.svg' );
+		# Google
+		$google = $option ? get_field( 'google', 'option' ) : get_field( 'google' );
+		$google__icon = get__file( '/google.svg' );
 
-# Email
-$email = get_field( 'email__address', 'option' );
-$email__icon = get__file( '/email.svg' );
+		# Youtube
+		$youtube = $option ? get_field( 'youtube', 'option' ) : get_field( 'youtube' );
+		$youtube__icon = get__file( '/youtube.svg' );
 
-# Page Vars	
-$url = urlencode('//' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
-$title = !empty($post->post_title) ? rawurlencode($post->post_title) : '';
-$excerpt = rawurlencode(get_the_excerpt());
+		# Instagram
+		$instagram = $option ? get_field( 'instagram', 'option' ) : get_field( 'instagram' );
+		$instagram__icon = get__file( '/instagram.svg' );
 
-# Main Vars Array
-$socialMedia = [
-	'twitter' => [
-		'link' => $twitter,
-		'icon' => $twitter__icon,
-		'share' => 'https://twitter.com/intent/tweet?source=' . $twitter__share . '&text=' . $title . ':%20' . $twitter__share . '&via=' . get_field( 'twitter__handle', 'option' ) . '"',
-	],
+		# Email
+		$email = $option ? get_field( 'email__address', 'option' ) : get_field( 'email__address' );
+		$email__icon = get__file( '/email.svg' );
 
-	'facebook' => [
-		'link' => $facebook,
-		'icon' => $facebook__icon,
-		'share' => 'http://www.facebook.com/sharer/sharer.php?s=100&amp;p[url]=' . $url . '&amp;p[title]=' . $title,
-	],
+		# Page Vars
+		$url = urlencode('//' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
+		$title = !empty($post->post_title) ? rawurlencode($post->post_title) : '';
+		$excerpt = rawurlencode(get_the_excerpt());
 
-	'linkedin' => [
-		'link' => $linkedin,
-		'icon' => $linkedin__icon,
-		'share' => 'http://www.linkedin.com/shareArticle?mini=true&url=' . $url . 'F&title=' . $title . '&summary=' . $excerpt . '&source=' . get_site_url(),
-	],
+		return [
+			'twitter' => [
+				'link' => $twitter,
+				'icon' => $twitter__icon,
+				'share' => 'https://twitter.com/intent/tweet?source=' . $twitter__share . '&text=' . $title . ':%20' . $twitter__share . '&via=' . get_field( 'twitter__handle', 'option' ) . '"',
+			],
 
-	'google' => [
-		'link' => $google,
-		'icon' => $google__icon,
-		'share' => 'https://plus.google.com/share?url=' . $url,
-	],
+			'facebook' => [
+				'link' => $facebook,
+				'icon' => $facebook__icon,
+				'share' => 'http://www.facebook.com/sharer/sharer.php?s=100&amp;p[url]=' . $url . '&amp;p[title]=' . $title,
+			],
 
-	'youtube' => [
-		'link' => $youtube,
-		'icon' => $youtube__icon,
-		'share' => false,
-	],
+			'linkedin' => [
+				'link' => $linkedin,
+				'icon' => $linkedin__icon,
+				'share' => 'http://www.linkedin.com/shareArticle?mini=true&url=' . $url . 'F&title=' . $title . '&summary=' . $excerpt . '&source=' . get_site_url(),
+			],
 
-	'instagram' => [
-		'link' => $instagram,
-		'icon' => $instagram__icon,
-		'share' => false,
-	],
+			'google' => [
+				'link' => $google,
+				'icon' => $google__icon,
+				'share' => 'https://plus.google.com/share?url=' . $url,
+			],
 
-	'email' => [
-		'link' => $email,
-		'icon' => $email__icon,
-		'share' => false,
-	],
-];
+			'youtube' => [
+				'link' => $youtube,
+				'icon' => $youtube__icon,
+				'share' => false,
+			],
+
+			'instagram' => [
+				'link' => $instagram,
+				'icon' => $instagram__icon,
+				'share' => false,
+			],
+
+			'email' => [
+				'link' => $email,
+				'icon' => $email__icon,
+				'share' => false,
+			],
+		];
+	}
+}

@@ -11,11 +11,7 @@ function get__file($filename, $path__resolution = false) {
 	}
 
 	else if ($path__resolution === 'uploads') {
-		$split = explode($_SERVER['HTTP_HOST'], $filename);
-		$split__cdn = explode('qventus-katiebushdesigni.netdna-ssl.com', $filename);
-		$length = count($split);
-		$pathname = ($length > 1) ? $split[1] : $split__cdn[1];
-		$path = $_SERVER['DOCUMENT_ROOT'] . $pathname;
+		$path = $_SERVER['DOCUMENT_ROOT'] . explode($_SERVER['HTTP_HOST'], $filename)[1];
 	}
 
 	else if (strpos($filename, 'svg') > -1 && !$path__resolution) {

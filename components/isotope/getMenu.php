@@ -2,9 +2,11 @@
 
 /*--------------------------------------------------------*\
 	Isotope Menu
+
+	TODO: Add Error Handler (WP_Error Object)
 \*--------------------------------------------------------*/
 
-function isotopeMenu($filters, $navigationClasses, $menuClasses) {
+function isotopeMenu($filters, $navigationClasses, $menuClasses, $all = true) {
 
 	# Class Definitions
 	$html = '';
@@ -12,14 +14,16 @@ function isotopeMenu($filters, $navigationClasses, $menuClasses) {
 	$html .= '<ul class="' . join(' ', $menuClasses) . '">';
 
 	# Menu Items
-	$html .= '<li class="menu__item filter__item" data-filter="*" id="filter--all">All</li>';
+	if ($all) {
+		$html .= '<li class="menu__item filter__item filter__item--active" data-filter="*" id="filter--all">All</li>';
+	}
 
 	# WP_Term Object
 	if (gettype($filters[0]) === 'object') {
-		foreach ($filters as $filter) {
+		foreach ($filters as $index => $filter) {
 			$filter__type = 'filter--' . camelCase(strtolower($filter->slug));
 			$html .= '<li class="menu__item filter__item" data-filter=".' . $filter__type . '" id="' . $filter__type . '">' . $filter->name . '</li>';
-		}	
+		}
 	}
 
 	# Otherwise assume standard array
@@ -27,7 +31,7 @@ function isotopeMenu($filters, $navigationClasses, $menuClasses) {
 	else {
 		foreach ($filters as $filter) {
 			$filter__name = $filter;
-			$filter__data = 'filter--' . $filter;
+			$filter__data = 'filter--' . camelCase(strtolower($filter));
 			$classes = ['menu__item', 'filter__item'];
 			$html .= "<li class=\"" . join(' ', $classes) . "\" data-filter=\".$filter__data\" id=\"$filter__data\">$filter__name</li>";
 		}

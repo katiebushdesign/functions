@@ -7,6 +7,7 @@
 $acfSettings = [
 	'optionsPages',
 	'colorPicker',
+	'acfSearch',
 ];
 
 foreach ($acfSettings as $setting) {
